@@ -1,5 +1,6 @@
 package com.ibrajix.currencyconvertercompose.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -24,14 +25,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ibrajix.currencyconvertercompose.ui.theme.LightGray
+import com.ibrajix.currencyconvertercompose.R
+import com.ibrajix.currencyconvertercompose.ui.theme.LightGrey
+import com.ibrajix.currencyconvertercompose.ui.theme.LightGrey2
+
 
 @Composable
 fun CurrencyInputSection(
@@ -47,17 +51,21 @@ fun CurrencyInputSection(
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.White, RoundedCornerShape(16.dp))
-            .padding(16.dp)
+            .padding(vertical = 16.dp)
     ) {
-        // From Currency
+
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(LightGrey2, shape = RoundedCornerShape(5.dp))
+                .padding(horizontal = 9.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             BasicTextField(
                 value = amount,
                 onValueChange = { onAmountChange(it) },
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 textStyle = TextStyle(
                     fontSize = 20.sp,
@@ -67,7 +75,7 @@ fun CurrencyInputSection(
             )
             Text(
                 text = fromCurrency,
-                fontSize = 20.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.LightGray
             )
@@ -76,7 +84,10 @@ fun CurrencyInputSection(
         Spacer(modifier = Modifier.height(24.dp))
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(LightGrey2, shape = RoundedCornerShape(5.dp))
+                .padding(horizontal = 9.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(
@@ -93,12 +104,12 @@ fun CurrencyInputSection(
                     text = result.ifEmpty { "0" }.takeLast(3),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = LightGray
+                    color = LightGrey
                 )
             }
             Text(
                 text = toCurrency,
-                fontSize = 20.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.LightGray
             )
@@ -108,20 +119,20 @@ fun CurrencyInputSection(
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             CurrencySelector(
                 currencyCode = fromCurrency,
                 onClick = { /* Show currency picker */ }
             )
 
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowDown,
-                contentDescription = "Swap currencies",
+            Image(
+                painter = painterResource(id = R.drawable.convert),
+                contentDescription = "Swap Icon",
                 modifier = Modifier
                     .size(24.dp)
-                    .rotate(90f),
-                tint = Color.Gray
+
             )
 
             CurrencySelector(
@@ -139,13 +150,13 @@ fun CurrencySelector(
 ) {
     Row(
         modifier = Modifier
-            .border(1.dp, Color.LightGray, RoundedCornerShape(8.dp))
-            .padding(8.dp)
+            .border(1.dp, Color.LightGray, RoundedCornerShape(5.dp))
+            .padding(12.dp)
             .clickable(onClick = onClick),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        
+
         Box(
             modifier = Modifier
                 .size(24.dp)

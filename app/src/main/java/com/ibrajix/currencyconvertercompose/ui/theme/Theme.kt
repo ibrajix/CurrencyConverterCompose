@@ -8,14 +8,8 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-// Theme colors
-val LightBlue = Color(0xFFE8F3FF)
-val LightGray = Color(0xFFAAAAAA)
-val PrimaryBlue = Color(0xFF0066CC)
-val PrimaryGreen = Color(0xFF0FCCB5)
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
