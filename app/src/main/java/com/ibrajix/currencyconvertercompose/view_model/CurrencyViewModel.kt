@@ -54,7 +54,6 @@ class CurrencyViewModel @Inject constructor(
 
     fun convertCurrency() {
         val amountValue = _amount.value.toDoubleOrNull() ?: return
-
         _conversionState.value = ConversionState.Loading
 
         viewModelScope.launch {

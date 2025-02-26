@@ -1,5 +1,6 @@
 package com.ibrajix.currencyconvertercompose.view
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,13 +17,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -33,6 +38,7 @@ import com.ibrajix.currencyconvertercompose.components.CurrencyInputSection
 import com.ibrajix.currencyconvertercompose.ui.theme.MainBlue
 import com.ibrajix.currencyconvertercompose.ui.theme.MainGreen
 import com.ibrajix.currencyconvertercompose.ui.theme.White
+import com.ibrajix.currencyconvertercompose.view_model.ConversionState
 import com.ibrajix.currencyconvertercompose.view_model.CurrencyViewModel
 
 
@@ -48,6 +54,18 @@ fun CurrencyConverterScreen(
     val historyTimeframe by viewModel.historyTimeframe.collectAsState()
     val rateHistory by viewModel.rateHistory.collectAsState()
     val conversionState by viewModel.conversionState.collectAsState()
+    val context = LocalContext.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    LaunchedEffect(conversionState) {
+        if (conversionState is ConversionState.Error) {
+            Toast.makeText(
+                context,
+                (conversionState as ConversionState.Error).message,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
 
     Box(
@@ -113,7 +131,10 @@ fun CurrencyConverterScreen(
             Spacer(modifier = Modifier.size(24.dp))
 
             Button(
-                onClick = { viewModel.convertCurrency() },
+                onClick = {
+                    keyboardController?.hide()
+                    viewModel.convertCurrency()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(68.dp)
@@ -123,12 +144,20 @@ fun CurrencyConverterScreen(
                 ),
                 shape = RoundedCornerShape(5.dp)
             ) {
-                Text(
-                    text = "Convert",
-                    color = White,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.W600
-                )
+                if (conversionState is ConversionState.Loading) {
+                    CircularProgressIndicator(
+                        color = White,
+                        modifier = Modifier.size(24.dp)
+                    )
+                } else {
+                    Text(
+                        text = "Convert",
+                        color = White,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.W600
+                    )
+                }
+
             }
 
         }

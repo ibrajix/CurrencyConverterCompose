@@ -33,7 +33,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ibrajix.currencyconvertercompose.R
-import com.ibrajix.currencyconvertercompose.ui.theme.LightGrey
 import com.ibrajix.currencyconvertercompose.ui.theme.LightGrey2
 
 
@@ -99,12 +98,6 @@ fun CurrencyInputSection(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
-                )
-                Text(
-                    text = result.ifEmpty { "0" }.takeLast(3),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = LightGrey
                 )
             }
             Text(
