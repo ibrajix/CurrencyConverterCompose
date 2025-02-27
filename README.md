@@ -19,7 +19,7 @@ You can get test api key for free here  (https://api.apilayer.com)
 ### BUILT WITH
 * Jetpack Compose
 * MVVM
-* Retrofit (With Moshi)
+* Retrofit (With GSON)
 * Hilt (Dependency Injection)
 * And more
 
