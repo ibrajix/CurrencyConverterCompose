@@ -7,7 +7,7 @@
     <img src="https://github.com/user-attachments/assets/3b82e36e-bd92-487e-919f-f17472dc41f8" width="200px" hspace="10"/>
 </p>
 
-HOW TO RUN THE APP:
+### HOW TO RUN THE APP:
 * Clone the app
 * Go to gradle.properties, insert your api key like this:
 * API_KEY=YOUR API KEY HERE
