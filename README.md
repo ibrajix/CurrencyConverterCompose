@@ -20,7 +20,7 @@ You can get test api key for free here  (https://api.apilayer.com)
 * MVVM
 * Retrofit (With Moshi)
 * Hilt (Dependency Injection)
-* ETC
+* And more
 
 
 ### Download 📱
