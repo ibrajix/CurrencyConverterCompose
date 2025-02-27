@@ -74,6 +74,11 @@ dependencies {
     //room
     implementation(libs.androidx.room.runtime)
 
+    //country picker
+    implementation("com.github.arpitkatiyar1999:Country-Picker:2.1.0")
+
+    //graph
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 
 

@@ -117,7 +117,6 @@ fun CurrencyConverterScreen(
                 modifier = Modifier.padding(bottom = 24.dp)
             )
 
-
             CurrencyInputSection(
                 fromCurrency = fromCurrency,
                 toCurrency = toCurrency,
@@ -158,6 +157,23 @@ fun CurrencyConverterScreen(
                     )
                 }
 
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MainBlue), // Match background color
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "No chart to display yet :))",
+                    color = White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
+
+//                ExchangeRateChart()
             }
 
         }

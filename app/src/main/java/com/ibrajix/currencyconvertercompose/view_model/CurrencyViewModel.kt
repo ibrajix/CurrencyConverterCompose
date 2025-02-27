@@ -39,18 +39,39 @@ class CurrencyViewModel @Inject constructor(
     private val _rateHistory = MutableStateFlow<List<ExchangeRateHistory>>(emptyList())
     val rateHistory: StateFlow<List<ExchangeRateHistory>> = _rateHistory
 
+    // A map of country codes to currency codes to handle country selection
+    private val countryToCurrencyMap = mapOf(
+        "us" to "USD",
+        "eu" to "EUR",
+        "gb" to "GBP",
+        "jp" to "JPY",
+        "ca" to "CAD",
+        "au" to "AUD",
+        "ch" to "CHF",
+        "cn" to "CNY",
+        "hk" to "HKD",
+        "nz" to "NZD",
+        "pl" to "PLN"
+
+    )
+
     fun updateFromCurrency(currency: String) {
         _fromCurrency.value = currency
+
+        _result.value = null
     }
 
     fun updateToCurrency(currency: String) {
         _toCurrency.value = currency
+
+        _result.value = null
     }
 
     fun updateAmount(amount: String) {
         _amount.value = amount
-    }
 
+        _result.value = null
+    }
 
     fun convertCurrency() {
         val amountValue = _amount.value.toDoubleOrNull() ?: return
@@ -81,6 +102,7 @@ class CurrencyViewModel @Inject constructor(
         }
     }
 
+    
 }
 
 sealed class ConversionState {
